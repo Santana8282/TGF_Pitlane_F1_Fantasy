@@ -18,7 +18,7 @@ include __DIR__ . '/../private/header.php';
     <div class="ayuda-hero">
         <div class="ayuda-hero-icono">🏎</div>
         <div class="ayuda-hero-texto">
-            <h3>Bienvenido a TGF Pitlane F1 Fantasy</h3>
+            <h3>Bienvenido a Pitlane F1 Fantasy</h3>
             <p>Forma tu equipo ideal con pilotos y escuderías de la Fórmula 1, acumula puntos carrera a carrera y demuestra que tienes el ojo de un director deportivo. El que más puntos acumule al final de la temporada, gana.</p>
         </div>
     </div>

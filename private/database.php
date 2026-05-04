@@ -4,8 +4,8 @@ function getDB(): PDO {
     if ($pdo === null) {
         $host = getenv('DB_HOST') ?: 'localhost';
         $name = getenv('DB_NAME') ?: 'pitlane_f1';
-        $user = getenv('DB_USER') ?: 'root';
-        $pass = getenv('DB_PASS') ?: '';
+        $user = getenv('DB_USER') ?: 'daniel';
+        $pass = getenv('DB_PASS') ?: 'lenovo';
         $dsn  = "mysql:host=$host;dbname=$name;charset=utf8mb4";
         $pdo  = new PDO($dsn, $user, $pass, [
             PDO::ATTR_ERRMODE              => PDO::ERRMODE_EXCEPTION,

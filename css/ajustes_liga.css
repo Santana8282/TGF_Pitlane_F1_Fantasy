@@ -1,0 +1,56 @@
+.volver-link{color:#888;text-decoration:none;font-size:.85rem;font-weight:600}.volver-link:hover{color:#e10600}
+.aj-liga-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:24px}
+.aj-liga-tab{display:inline-flex;align-items:center;gap:6px;padding:7px 16px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:8px;color:#888;font-size:.83rem;font-weight:600;text-decoration:none;transition:all .15s}
+.aj-liga-tab:hover{background:rgba(255,255,255,.09);color:#ccc}.aj-liga-tab.activo{background:rgba(225,6,0,.12);border-color:rgba(225,6,0,.35);color:#f0f0f0}
+.aj-badge-creador{font-size:.65rem;background:#e10600;color:#fff;padding:1px 5px;border-radius:4px;font-weight:800}
+.aj-grid{display:grid;grid-template-columns:320px 1fr;gap:20px;align-items:start}
+@media(max-width:780px){.aj-grid{grid-template-columns:1fr}}
+.aj-col-left,.aj-col-right{display:flex;flex-direction:column;gap:16px}
+.aj-card{background:var(--fondo-card,#12121e);border:1px solid var(--borde,#1e1e2e);border-radius:14px;padding:22px}
+.aj-card-danger{border-color:rgba(255,64,64,.25);background:rgba(255,64,64,.04)}
+.aj-card-titulo{display:flex;align-items:center;gap:8px;font-size:.88rem;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:#d0d0d0;margin:0 0 14px}
+.aj-card-desc{font-size:.83rem;color:#888;line-height:1.5;margin:0 0 14px}
+.aj-codigo-box{display:flex;align-items:center;gap:10px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:12px 16px;margin-bottom:10px}
+.aj-codigo{flex:1;font-size:1.5rem;font-weight:900;letter-spacing:.18em;color:#f0f0f0}
+.aj-btn-copiar{display:inline-flex;align-items:center;gap:5px;padding:7px 14px;background:#e10600;border:none;border-radius:7px;color:#fff;font-weight:700;font-size:.8rem;cursor:pointer;transition:background .15s;white-space:nowrap}
+.aj-btn-copiar:hover{background:#ff1a0e}.aj-btn-copiar.copiado{background:#16a34a}
+.aj-info-lista{display:flex;flex-direction:column;gap:10px}
+.aj-info-fila{display:flex;justify-content:space-between;align-items:center}
+.aj-info-label{font-size:.78rem;color:#666;font-weight:600;text-transform:uppercase;letter-spacing:.05em}
+.aj-info-val{font-size:.88rem;font-weight:700;color:#d0d0d0}
+.aj-form{display:flex;flex-direction:column;gap:14px}
+.aj-field{display:flex;flex-direction:column;gap:6px}
+.aj-field label{font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#888}
+.aj-field input{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:9px;padding:10px 13px;color:#f0f0f0;font-size:.9rem;transition:border-color .2s;width:100%;box-sizing:border-box}
+.aj-field input:focus{outline:none;border-color:#e10600}.aj-field input::placeholder{color:#555}
+.aj-btn-guardar{padding:11px 24px;background:#e10600;border:none;border-radius:9px;color:#fff;font-weight:800;font-size:.9rem;cursor:pointer;transition:background .15s;align-self:flex-start}
+.aj-btn-guardar:hover{background:#ff1a0e}
+.aj-btn-secundario{padding:9px 18px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.14);border-radius:9px;color:#b0b0b0;font-weight:700;font-size:.85rem;cursor:pointer;transition:background .15s;width:100%}
+.aj-btn-secundario:hover{background:rgba(255,255,255,.12);color:#fff}
+.aj-btn-danger{padding:11px 18px;background:transparent;border:1px solid rgba(255,64,64,.4);border-radius:9px;color:#ff4040;font-weight:700;font-size:.85rem;cursor:pointer;transition:background .15s,border-color .15s;width:100%}
+.aj-btn-danger:hover{background:rgba(255,64,64,.1);border-color:rgba(255,64,64,.7)}
+.aj-miembros-lista{display:flex;flex-direction:column}
+.aj-miembro-fila{display:flex;align-items:center;gap:12px;padding:11px 0;border-bottom:1px solid rgba(255,255,255,.06)}
+.aj-miembro-fila:last-child{border-bottom:none}
+.aj-miembro-pos{width:24px;font-size:.8rem;font-weight:900;color:#555;text-align:center;flex-shrink:0}
+.aj-miembro-info{flex:1;min-width:0}
+.aj-miembro-nombre{display:flex;align-items:center;gap:6px;font-weight:700;font-size:.88rem;color:#e0e0e0}
+.aj-miembro-sub{font-size:.75rem;color:#666;margin-top:2px}
+.aj-miembro-pts{font-weight:700;font-size:.85rem;color:#c0c0c0;white-space:nowrap}
+.aj-miembro-pts small{font-size:.7rem;color:#666}
+.aj-miembro-acciones{display:flex;gap:6px;flex-shrink:0}
+.aj-badge-yo{font-size:.65rem;background:#e10600;color:#fff;padding:1px 5px;border-radius:4px;font-weight:800}
+.aj-badge-creador2{font-size:.65rem;background:rgba(255,255,255,.1);color:#aaa;padding:1px 6px;border-radius:4px;font-weight:700}
+.aj-btn-expulsar{padding:5px 10px;background:rgba(255,64,64,.1);border:1px solid rgba(255,64,64,.25);border-radius:6px;color:#ff4040;font-size:.75rem;font-weight:700;cursor:pointer;transition:background .15s;flex-shrink:0}
+.aj-btn-expulsar:hover{background:rgba(255,64,64,.22)}
+.aj-btn-transferir{padding:5px 10px;background:rgba(245,158,11,.1);border:1px solid rgba(245,158,11,.25);border-radius:6px;color:#f59e0b;font-size:.75rem;font-weight:700;cursor:pointer;transition:background .15s;flex-shrink:0}
+.aj-btn-transferir:hover{background:rgba(245,158,11,.22)}
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:999;align-items:center;justify-content:center}
+.modal-overlay.abierto{display:flex}
+.modal{background:#0d0d0d;border:1px solid #222;border-radius:16px;width:100%;max-width:520px;max-height:90vh;overflow-y:auto;position:relative}
+.modal-header{display:flex;justify-content:space-between;align-items:flex-start;padding:24px 24px 0}
+.modal-slot-label{font-size:.7rem;font-weight:900;text-transform:uppercase;letter-spacing:.12em;color:#e10600;margin-bottom:4px}
+.modal-header h3{font-size:1.2rem;font-weight:900;text-transform:uppercase;margin:0}
+.modal-cerrar{background:none;border:none;color:#888;font-size:1.2rem;cursor:pointer;padding:4px 8px}
+.modal-cerrar:hover{color:#fff}
+.modal-body{padding:20px 24px 24px}

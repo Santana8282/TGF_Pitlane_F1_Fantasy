@@ -1,0 +1,23 @@
+.btn-liga-ajustes {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 14px;
+    background: rgba(255,255,255,.07);
+    border: 1px solid rgba(255,255,255,.14);
+    border-radius: 9px;
+    color: #b0b0b0;
+    font-size: 0.82rem;
+    font-weight: 700;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background .15s, color .15s, border-color .15s;
+}
+.btn-liga-ajustes:hover {
+    background: rgba(225,6,0,.12);
+    border-color: rgba(225,6,0,.35);
+    color: #fff;
+}
+.btn-liga-ajustes svg {
+    flex-shrink: 0;
+}

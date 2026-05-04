@@ -1,0 +1,23 @@
+.admin-acceso-mercado {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 16px;
+}
+.admin-acceso-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 8px 16px;
+    background: rgba(225, 6, 0, .12);
+    border: 1px solid rgba(225, 6, 0, .3);
+    border-radius: 8px;
+    color: #e10600;
+    font-size: 0.83rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background .2s, border-color .2s;
+}
+.admin-acceso-btn:hover {
+    background: rgba(225, 6, 0, .22);
+    border-color: rgba(225, 6, 0, .6);
+}

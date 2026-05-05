@@ -3815,3 +3815,199 @@ tbody tr:last-child td { border-bottom: none; }
     text-transform: uppercase;
     line-height: 1.6;
 }
+
+/* ═══════════════════════════════════════════════
+   RESPONSIVE MÓVIL — max-width: 768px
+   ═══════════════════════════════════════════════ */
+@media (max-width: 768px) {
+
+    /* ── Layout general ─────────────────────── */
+    .contenedor {
+        flex-direction: column;
+    }
+
+    .barra-lateral {
+        width: 100%;
+        min-width: unset;
+        min-height: unset;
+        padding: 14px 16px;
+        border-right: none;
+        border-bottom: 1px solid var(--color-borde);
+        flex-direction: row;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 8px;
+        position: sticky;
+        top: 0;
+        z-index: 100;
+    }
+
+    .logo {
+        margin-bottom: 0;
+        margin-right: auto;
+    }
+    .logo h1 { font-size: 16px; }
+    .logo p  { display: none; }
+
+    .menu {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 2px;
+        margin-top: 0;
+    }
+
+    .menu a {
+        padding: 6px 10px;
+        font-size: 11px;
+        gap: 5px;
+        border-radius: 6px;
+    }
+    .menu a span { display: none; }
+    .menu-icono { width: 18px; height: 18px; }
+
+    .usuario {
+        display: none;
+    }
+
+    .principal {
+        padding: 16px;
+    }
+
+    /* ── Encabezado ─────────────────────────── */
+    .encabezado h2 {
+        font-size: 22px;
+    }
+    .encabezado p.panel {
+        font-size: 10px;
+    }
+
+    /* ── Tarjetas resumen (index) ───────────── */
+    .tarjetas {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+
+    /* ── Contenido index (movimientos + GP) ─── */
+    .contenido {
+        flex-direction: column;
+        gap: 16px;
+    }
+    .gran-premio {
+        width: 100%;
+        min-height: 160px;
+    }
+    .contador { gap: 8px; }
+    .contador span { font-size: 22px; }
+
+    /* ── Tabla movimientos ──────────────────── */
+    .movimientos table {
+        font-size: 12px;
+    }
+    .movimientos th,
+    .movimientos td {
+        padding: 8px 10px;
+    }
+
+    /* ── Clasificación ──────────────────────── */
+    .clasif-resumen {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+    .clasif-tabla {
+        font-size: 12px;
+    }
+    .clasif-tabla th,
+    .clasif-tabla td {
+        padding: 10px 8px;
+        font-size: 11px;
+    }
+    .col-piloto { display: none; }
+    .col-carreras { display: none; }
+    .insignia-pos { width: 28px; height: 28px; font-size: 12px; }
+
+    /* ── Mercado ────────────────────────────── */
+    .mercado-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+    .mercado-card {
+        flex-direction: column;
+    }
+    .mercado-foto-wrap {
+        width: 100%;
+        height: 140px;
+    }
+
+    /* ── Mi equipo ──────────────────────────── */
+    .equipo-stats {
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+    }
+    .garaje-grid,
+    .garaje-grid-tres {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+    .slot-piloto {
+        aspect-ratio: unset;
+        height: 160px;
+    }
+
+    /* ── Resultados ─────────────────────────── */
+    .res-tabla th,
+    .res-tabla td {
+        padding: 8px 10px;
+        font-size: 11px;
+    }
+    .res-tab { font-size: 11px; padding: 8px 12px; }
+
+    /* ── Ligas ──────────────────────────────── */
+    .ligas-grid {
+        grid-template-columns: 1fr;
+    }
+    .liga-card-footer {
+        flex-wrap: wrap;
+    }
+    .ligas-acciones-wrap {
+        grid-template-columns: 1fr;
+    }
+
+    /* ── Ajustes liga ───────────────────────── */
+    .ajustes-liga-grid {
+        grid-template-columns: 1fr;
+    }
+
+    /* ── Modales ────────────────────────────── */
+    .modal-contenido {
+        width: 95%;
+        padding: 20px 16px;
+        margin: 16px;
+    }
+    .modal-piloto-lista {
+        max-height: 50vh;
+    }
+
+    /* ── Admin pilotos ──────────────────────── */
+    .admin-tabla th,
+    .admin-tabla td {
+        padding: 8px 10px;
+        font-size: 12px;
+    }
+    .admin-tabla .col-imagen { display: none; }
+
+    /* ── Ayuda ──────────────────────────────── */
+    .ayuda-secciones {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    .barra-lateral { padding: 10px 12px; }
+    .logo h1 { font-size: 14px; }
+    .menu a { padding: 5px 8px; }
+    .encabezado h2 { font-size: 18px; }
+    .equipo-stats { grid-template-columns: 1fr; }
+    .clasif-tabla th.col-pts,
+    .clasif-tabla td.col-pts { font-size: 13px; }
+}

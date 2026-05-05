@@ -73,9 +73,9 @@ include __DIR__ . '/../private/header.php';
                 <th class="col-pos">POS</th>
                 <th class="col-equipo">Equipo</th>
                 <th class="col-piloto">Manager</th>
-                <th class="col-carreras" style="text-align:center">Carreras</th>
-                <th class="col-pts" style="text-align:right">Puntos</th>
-                <th class="col-dif" style="text-align:right">Diferencia</th>
+                <th class="col-carreras">Carreras</th>
+                <th class="col-pts">Puntos</th>
+                <th class="col-dif">Diferencia</th>
             </tr>
         </thead>
         <tbody>

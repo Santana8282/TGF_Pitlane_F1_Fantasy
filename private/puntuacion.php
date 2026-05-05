@@ -195,8 +195,15 @@ function guardarPuntosEnEquipos(
     $pdo->prepare("UPDATE resultados_carrera SET puntos_fantasy=? WHERE id_resultado=?")
         ->execute([$puntos, $idResultado]);
 
-    $stmt = $pdo->prepare("SELECT id_equipo, es_capitan FROM pilotos_equipo_fantasy WHERE id_piloto=?");
-    $stmt->execute([$idPiloto]);
+    // Solo dar puntos a equipos que tenían este piloto ANTES o DURANTE la fecha de la carrera
+    $stmt = $pdo->prepare("
+        SELECT pef.id_equipo, pef.es_capitan
+        FROM pilotos_equipo_fantasy pef
+        JOIN carreras c ON c.id_carrera = ?
+        WHERE pef.id_piloto = ?
+          AND (pef.fecha_inclusion IS NULL OR DATE(pef.fecha_inclusion) <= DATE(c.fecha))
+    ");
+    $stmt->execute([$idCarrera, $idPiloto]);
     $equipos = $stmt->fetchAll();
 
     foreach ($equipos as $eq) {
@@ -224,8 +231,15 @@ function guardarPuntosEscuderiaEnEquipos(int $idEscuderia, int $idCarrera): void
     $pdo  = getDB();
     $calc = calcularPuntosEscuderia($idEscuderia, $idCarrera);
 
-    $stmt = $pdo->prepare("SELECT id_equipo FROM escuderia_equipo_fantasy WHERE id_escuderia=?");
-    $stmt->execute([$idEscuderia]);
+    // Solo dar puntos a equipos que tenían esta escudería ANTES o DURANTE la fecha de la carrera
+    $stmt = $pdo->prepare("
+        SELECT eef.id_equipo
+        FROM escuderia_equipo_fantasy eef
+        JOIN carreras c ON c.id_carrera = ?
+        WHERE eef.id_escuderia = ?
+          AND (eef.fecha_inclusion IS NULL OR DATE(eef.fecha_inclusion) <= DATE(c.fecha))
+    ");
+    $stmt->execute([$idCarrera, $idEscuderia]);
     foreach ($stmt->fetchAll(PDO::FETCH_COLUMN) as $idEquipo) {
         $pdo->prepare("DELETE FROM puntos_escuderia_fantasy WHERE id_equipo=? AND id_escuderia=? AND id_carrera=?")
             ->execute([$idEquipo,$idEscuderia,$idCarrera]);
@@ -237,7 +251,14 @@ function guardarPuntosEscuderiaEnEquipos(int $idEscuderia, int $idCarrera): void
 function recalcularResumenJornada(int $idCarrera): void
 {
     $pdo     = getDB();
-    $equipos = $pdo->query("SELECT id_equipo FROM equipos_fantasy")->fetchAll(PDO::FETCH_COLUMN);
+    // Solo recalcular equipos creados antes o durante la fecha de esta carrera
+    $stmtEq = $pdo->prepare("
+        SELECT ef.id_equipo FROM equipos_fantasy ef
+        JOIN carreras c ON c.id_carrera = ?
+        WHERE ef.fecha_creacion IS NULL OR DATE(ef.fecha_creacion) <= DATE(c.fecha)
+    ");
+    $stmtEq->execute([$idCarrera]);
+    $equipos = $stmtEq->fetchAll(PDO::FETCH_COLUMN);
 
     foreach ($equipos as $idEquipo) {
         $stmtP = $pdo->prepare("
@@ -796,4 +817,56 @@ function actualizarValoresMercado(int $idCarrera): void
                 puntos_carrera = VALUES(puntos_carrera)
         ")->execute([$idPiloto, $idCarrera, $nuevoPrecio, $variacion, $ptsCarrera]);
     }
+}
+
+/**
+ * Elimina puntos mal asignados a equipos que aún no existían
+ * o que ficharon el piloto/escudería después de que se disputó la carrera.
+ * Ejecutar una vez para limpiar datos incorrectos ya guardados en BD.
+ */
+function limpiarPuntosMalAsignados(): int
+{
+    $pdo     = getDB();
+    $borrados = 0;
+
+    // Pilotos: eliminar puntos donde fecha_inclusion > fecha carrera
+    $stmt = $pdo->query("
+        DELETE pf FROM puntos_fantasy pf
+        JOIN pilotos_equipo_fantasy pef
+            ON pef.id_equipo = pf.id_equipo AND pef.id_piloto = pf.id_piloto
+        JOIN carreras c ON c.id_carrera = pf.id_carrera
+        WHERE pef.fecha_inclusion IS NOT NULL
+          AND DATE(pef.fecha_inclusion) > DATE(c.fecha)
+          AND pf.es_escuderia = 0
+    ");
+    $borrados += $stmt->rowCount();
+
+    // Escuderías: eliminar puntos donde fecha_inclusion > fecha carrera
+    $stmt2 = $pdo->query("
+        DELETE pef2 FROM puntos_escuderia_fantasy pef2
+        JOIN escuderia_equipo_fantasy eef
+            ON eef.id_equipo = pef2.id_equipo AND eef.id_escuderia = pef2.id_escuderia
+        JOIN carreras c ON c.id_carrera = pef2.id_carrera
+        WHERE eef.fecha_inclusion IS NOT NULL
+          AND DATE(eef.fecha_inclusion) > DATE(c.fecha)
+    ");
+    $borrados += $stmt2->rowCount();
+
+    // Equipos creados después de la carrera
+    $stmt3 = $pdo->query("
+        DELETE pf FROM puntos_fantasy pf
+        JOIN equipos_fantasy ef ON ef.id_equipo = pf.id_equipo
+        JOIN carreras c ON c.id_carrera = pf.id_carrera
+        WHERE ef.fecha_creacion IS NOT NULL
+          AND DATE(ef.fecha_creacion) > DATE(c.fecha)
+    ");
+    $borrados += $stmt3->rowCount();
+
+    // Recalcular resumen de jornada para todas las carreras afectadas
+    $carreras = $pdo->query("SELECT DISTINCT id_carrera FROM puntos_fantasy_carrera")->fetchAll(PDO::FETCH_COLUMN);
+    foreach ($carreras as $idC) {
+        recalcularResumenJornada((int)$idC);
+    }
+
+    return $borrados;
 }

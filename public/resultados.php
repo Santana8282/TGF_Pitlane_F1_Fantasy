@@ -11,6 +11,12 @@ $isAdmin = esAdmin();
 
 if ($isAdmin && $_SERVER['REQUEST_METHOD'] === 'POST') {
 
+    // Limpieza de puntos mal asignados
+    if (($_POST['accion'] ?? '') === 'limpiar_puntos') {
+        $borrados = limpiarPuntosMalAsignados();
+        $flash = ['tipo' => 'ok', 'msg' => "Limpieza completada. Registros incorrectos eliminados: {$borrados}. Puntos recalculados."];
+    }
+
     if (($_POST['accion'] ?? '') === 'sincronizar') {
         $idCarrera = (int)($_POST['id_carrera'] ?? 0);
         if ($idCarrera > 0) {
@@ -176,6 +182,12 @@ include __DIR__ . '/../private/header.php';
                 <p class="res-circuito"><?= htmlspecialchars($carreraActual['circuito']) ?> · <?= date('d/m/Y', strtotime($carreraActual['fecha'])) ?></p>
             </div>
             <?php if ($isAdmin): ?>
+        <form method="POST" style="display:inline-block;margin-bottom:12px" onsubmit="return confirm('Esto eliminara puntos de equipos que ficharon pilotos despues de la carrera. Continuar?')">
+            <input type="hidden" name="accion" value="limpiar_puntos">
+            <button type="submit" class="btn-sync" style="background:rgba(225,6,0,.12);border:1px solid rgba(225,6,0,.35);color:#e10600">
+                Limpiar puntos incorrectos
+            </button>
+        </form>
             <div class="res-carrera-header-fila">
                 <?php if (strtotime($carreraActual['fecha']) < time()): ?>
                 <form method="POST" style="display:inline;">

@@ -14,7 +14,6 @@ include __DIR__ . '/../private/header.php';
 
 <div class="ayuda-contenedor">
 
-    <!-- ── INTRO ── -->
     <div class="ayuda-hero">
         <div class="ayuda-hero-icono">🏎</div>
         <div class="ayuda-hero-texto">
@@ -23,10 +22,8 @@ include __DIR__ . '/../private/header.php';
         </div>
     </div>
 
-    <!-- ── SECCIONES ── -->
     <div class="ayuda-grid">
 
-        <!-- 1. El equipo -->
         <div class="ayuda-card">
             <div class="ayuda-card-header">
                 <span class="ayuda-num">01</span>
@@ -42,7 +39,6 @@ include __DIR__ . '/../private/header.php';
             </div>
         </div>
 
-        <!-- 2. Presupuesto y mercado -->
         <div class="ayuda-card">
             <div class="ayuda-card-header">
                 <span class="ayuda-num">02</span>
@@ -58,7 +54,6 @@ include __DIR__ . '/../private/header.php';
             </div>
         </div>
 
-        <!-- 3. Cómo se puntúa: pilotos -->
         <div class="ayuda-card ayuda-card--full">
             <div class="ayuda-card-header">
                 <span class="ayuda-num">03</span>
@@ -114,7 +109,6 @@ include __DIR__ . '/../private/header.php';
             </div>
         </div>
 
-        <!-- 4. Escudería -->
         <div class="ayuda-card">
             <div class="ayuda-card-header">
                 <span class="ayuda-num">04</span>
@@ -131,7 +125,6 @@ include __DIR__ . '/../private/header.php';
             </div>
         </div>
 
-        <!-- 5. Estrategia -->
         <div class="ayuda-card">
             <div class="ayuda-card-header">
                 <span class="ayuda-num">05</span>
@@ -148,7 +141,6 @@ include __DIR__ . '/../private/header.php';
             </div>
         </div>
 
-        <!-- 6. Páginas de la app -->
         <div class="ayuda-card ayuda-card--full">
             <div class="ayuda-card-header">
                 <span class="ayuda-num">06</span>
@@ -190,8 +182,8 @@ include __DIR__ . '/../private/header.php';
             </div>
         </div>
 
-    </div><!-- /ayuda-grid -->
+    </div>
 
-</div><!-- /ayuda-contenedor -->
+</div>
 
 <?php include __DIR__ . '/../private/footer.php'; ?>

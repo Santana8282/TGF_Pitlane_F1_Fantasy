@@ -30,10 +30,10 @@ define('MAX_MISMA_ESC',   2);
 define('MAX_PILOTOS',     5);
 define('CAMBIOS_GRATIS',  3);
 
-define('PEN_ALIN_NADA',       0);   // 0 huecos → sin penalizacion, sin puntuar solo los que hay
-define('PEN_ALIN_UNO',       -10);  // falta 1 elemento (1 piloto O escuderia)
-define('PEN_ALIN_DOS',       -20);  // faltan 2 elementos (ambos pilotos, o 1 piloto + escuderia)
-define('PEN_ALIN_TRES',      -30);  // faltan los 3 elementos (ambos pilotos + escuderia)
+define('PEN_ALIN_NADA',       0);   
+define('PEN_ALIN_UNO',       -10);  
+define('PEN_ALIN_DOS',       -20);  
+define('PEN_ALIN_TRES',      -30);  
 
 function calcularPuntosResultado(array $r): array
 {
@@ -195,7 +195,6 @@ function guardarPuntosEnEquipos(
     $pdo->prepare("UPDATE resultados_carrera SET puntos_fantasy=? WHERE id_resultado=?")
         ->execute([$puntos, $idResultado]);
 
-    // Solo dar puntos a equipos que tenían este piloto ANTES o DURANTE la fecha de la carrera
     $stmt = $pdo->prepare("
         SELECT pef.id_equipo, pef.es_capitan
         FROM pilotos_equipo_fantasy pef
@@ -231,7 +230,6 @@ function guardarPuntosEscuderiaEnEquipos(int $idEscuderia, int $idCarrera): void
     $pdo  = getDB();
     $calc = calcularPuntosEscuderia($idEscuderia, $idCarrera);
 
-    // Solo dar puntos a equipos que tenían esta escudería ANTES o DURANTE la fecha de la carrera
     $stmt = $pdo->prepare("
         SELECT eef.id_equipo
         FROM escuderia_equipo_fantasy eef
@@ -251,7 +249,6 @@ function guardarPuntosEscuderiaEnEquipos(int $idEscuderia, int $idCarrera): void
 function recalcularResumenJornada(int $idCarrera): void
 {
     $pdo     = getDB();
-    // Solo recalcular equipos creados antes o durante la fecha de esta carrera
     $stmtEq = $pdo->prepare("
         SELECT ef.id_equipo FROM equipos_fantasy ef
         JOIN carreras c ON c.id_carrera = ?
@@ -279,21 +276,19 @@ function recalcularResumenJornada(int $idCarrera): void
 
         $stmtSlots = $pdo->prepare("SELECT COUNT(*) FROM pilotos_equipo_fantasy WHERE id_equipo = ? AND slot IN (1,2)");
         $stmtSlots->execute([$idEquipo]);
-        $slotsOcupados = (int)$stmtSlots->fetchColumn(); // 0, 1 o 2
-
+        $slotsOcupados = (int)$stmtSlots->fetchColumn(); 
         $stmtTieneEsc = $pdo->prepare("SELECT COUNT(*) FROM escuderia_equipo_fantasy WHERE id_equipo = ?");
         $stmtTieneEsc->execute([$idEquipo]);
-        $tieneEscuderia = (int)$stmtTieneEsc->fetchColumn(); // 0 o 1
-
-        $huecos = (2 - $slotsOcupados) + (1 - $tieneEscuderia); // 0..3
+        $tieneEscuderia = (int)$stmtTieneEsc->fetchColumn(); 
+        $huecos = (2 - $slotsOcupados) + (1 - $tieneEscuderia); 
 
         $penAlin = 0;
         if ($huecos === 3) {
-            $penAlin = abs(PEN_ALIN_TRES);   // 30
+            $penAlin = abs(PEN_ALIN_TRES);   
         } elseif ($huecos === 2) {
-            $penAlin = abs(PEN_ALIN_DOS);    // 20
+            $penAlin = abs(PEN_ALIN_DOS);    
         } elseif ($huecos === 1) {
-            $penAlin = abs(PEN_ALIN_UNO);    // 10
+            $penAlin = abs(PEN_ALIN_UNO);    
         }
 
         $pen += $penAlin;
@@ -728,11 +723,11 @@ function getCambiosRestantes(int $idEquipo): array
     return ['gratis'=>$vent['gratis'],'usados'=>$vent['usados'],'restantes'=>$restantes,'extras'=>$extras,'coste_extra'=>$vent['coste']];
 }
 
-define('MERCADO_PRECIO_MIN',   5_000_000);   //  5M€ mínimo
-define('MERCADO_PRECIO_MAX',  35_000_000);   // 35M€ máximo
-define('MERCADO_FACTOR',         200_000);   // €  por punto de desviación
-define('MERCADO_MAX_VARIACION',3_000_000);   // ±3M€ máximo por carrera
-define('MERCADO_CARRERAS_MEDIA',       3);   // Media de las últimas N carreras
+define('MERCADO_PRECIO_MIN',   5_000_000);   
+define('MERCADO_PRECIO_MAX',  35_000_000);   
+define('MERCADO_FACTOR',         200_000);   
+define('MERCADO_MAX_VARIACION',3_000_000);   
+define('MERCADO_CARRERAS_MEDIA',       3);   
 function actualizarValoresMercado(int $idCarrera): void
 {
     $pdo = getDB();
@@ -772,7 +767,7 @@ function actualizarValoresMercado(int $idCarrera): void
 
         if ($piloto['puntos_guardados'] !== null &&
             (int)$piloto['puntos_guardados'] === $ptsCarrera) {
-            continue;  // misma carrera, mismos puntos → nada que actualizar
+            continue;  
         }
 
         $precioBase = $piloto['precio_base_carrera'] !== null
@@ -819,17 +814,12 @@ function actualizarValoresMercado(int $idCarrera): void
     }
 }
 
-/**
- * Elimina puntos mal asignados a equipos que aún no existían
- * o que ficharon el piloto/escudería después de que se disputó la carrera.
- * Ejecutar una vez para limpiar datos incorrectos ya guardados en BD.
- */
+
 function limpiarPuntosMalAsignados(): int
 {
     $pdo     = getDB();
     $borrados = 0;
 
-    // Pilotos: eliminar puntos donde fecha_inclusion > fecha carrera
     $stmt = $pdo->query("
         DELETE pf FROM puntos_fantasy pf
         JOIN pilotos_equipo_fantasy pef
@@ -841,7 +831,6 @@ function limpiarPuntosMalAsignados(): int
     ");
     $borrados += $stmt->rowCount();
 
-    // Escuderías: eliminar puntos donde fecha_inclusion > fecha carrera
     $stmt2 = $pdo->query("
         DELETE pef2 FROM puntos_escuderia_fantasy pef2
         JOIN escuderia_equipo_fantasy eef
@@ -852,7 +841,6 @@ function limpiarPuntosMalAsignados(): int
     ");
     $borrados += $stmt2->rowCount();
 
-    // Equipos creados después de la carrera
     $stmt3 = $pdo->query("
         DELETE pf FROM puntos_fantasy pf
         JOIN equipos_fantasy ef ON ef.id_equipo = pf.id_equipo
@@ -861,8 +849,7 @@ function limpiarPuntosMalAsignados(): int
           AND DATE(ef.fecha_creacion) > DATE(c.fecha)
     ");
     $borrados += $stmt3->rowCount();
-
-    // Recalcular resumen de jornada para todas las carreras afectadas
+    
     $carreras = $pdo->query("SELECT DISTINCT id_carrera FROM puntos_fantasy_carrera")->fetchAll(PDO::FETCH_COLUMN);
     foreach ($carreras as $idC) {
         recalcularResumenJornada((int)$idC);

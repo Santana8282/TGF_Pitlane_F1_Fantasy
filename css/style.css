@@ -3816,19 +3816,14 @@ tbody tr:last-child td { border-bottom: none; }
     line-height: 1.6;
 }
 
-/* ═══════════════════════════════════════════════════════════
-   RESPONSIVE MÓVIL
-   ═══════════════════════════════════════════════════════════ */
 
 @media (max-width: 768px) {
 
-    /* ── Layout contenedor principal ───────────────────────── */
     .contenedor {
         flex-direction: column;
         min-height: 100vh;
     }
 
-    /* ── Barra lateral → barra superior ────────────────────── */
     .barra-lateral {
         width: 100%;
         min-width: unset;
@@ -3854,7 +3849,6 @@ tbody tr:last-child td { border-bottom: none; }
     .logo h1 { font-size: 16px; margin: 0; }
     .logo p  { display: none; }
 
-    /* Menú horizontal scrollable */
     .menu {
         display: flex;
         flex-direction: row;
@@ -3882,25 +3876,18 @@ tbody tr:last-child td { border-bottom: none; }
 
     .usuario { display: none; }
 
-    /* ── Área principal ─────────────────────────────────────── */
     .principal {
         padding: 16px 14px 32px;
         min-height: unset;
         overflow-x: hidden;
     }
 
-    /* ── Encabezados ────────────────────────────────────────── */
     .encabezado { margin-bottom: 16px; }
     .encabezado h2 { font-size: 20px; }
     .encabezado-fila { flex-direction: column; gap: 10px; }
     .equipo-encabezado { margin-bottom: 20px; }
     .equipo-encabezado h2 { font-size: 22px; }
 
-    /* ═══════════════════════════════════════════════════════
-       INICIO (index.php)
-       ═══════════════════════════════════════════════════════ */
-
-    /* Tarjetas resumen: columna */
     .tarjetas {
         flex-direction: column;
         gap: 10px;
@@ -3909,22 +3896,18 @@ tbody tr:last-child td { border-bottom: none; }
     .tarjeta { padding: 18px 20px; }
     .tarjeta h3 { font-size: 28px; }
 
-    /* Contenido (movimientos + GP): columna */
     .contenido {
         flex-direction: column;
         gap: 16px;
     }
 
-    /* Tabla movimientos */
     .movimientos { padding: 16px; }
     .movimientos table { font-size: 12px; }
     .movimientos th,
     .movimientos td { padding: 8px 8px; }
-    /* Ocultar columna detalle en pantallas muy pequeñas */
     .movimientos th:nth-child(3),
     .movimientos td:nth-child(3) { display: none; }
 
-    /* Gran Premio */
     .gran-premio {
         width: 100%;
         min-height: 160px;
@@ -3935,11 +3918,6 @@ tbody tr:last-child td { border-bottom: none; }
     .contador span { font-size: 22px; }
     .contador small { font-size: 9px; }
 
-    /* ═══════════════════════════════════════════════════════
-       MI EQUIPO (equipo.php)
-       ═══════════════════════════════════════════════════════ */
-
-    /* Stats bar: scroll horizontal */
     .stats-bar {
         display: grid;
         grid-template-columns: 1fr 1fr;
@@ -3948,13 +3926,11 @@ tbody tr:last-child td { border-bottom: none; }
     }
     .stat-card { padding: 14px 16px; }
     .stat-card .stat-valor { font-size: 20px; }
-    /* La tarjeta de próxima carrera ocupa todo el ancho */
     .stat-card.stat-proximo {
         grid-column: 1 / -1;
     }
     .stat-countdown { font-size: 13px; }
 
-    /* Garaje: columna */
     .garaje-grid,
     .garaje-grid-tres {
         grid-template-columns: 1fr;
@@ -3965,11 +3941,6 @@ tbody tr:last-child td { border-bottom: none; }
         height: 180px;
     }
 
-    /* ═══════════════════════════════════════════════════════
-       MERCADO (mercado.php)
-       ═══════════════════════════════════════════════════════ */
-
-    /* Controles mercado */
     .mercado-controles {
         flex-direction: column;
         gap: 10px;
@@ -3978,21 +3949,15 @@ tbody tr:last-child td { border-bottom: none; }
     .mercado-busqueda { width: 100%; }
     .mercado-filtros { flex-wrap: wrap; gap: 6px; }
 
-    /* Grid: 1 columna en móvil */
     .mercado-grid {
         grid-template-columns: 1fr;
         gap: 14px;
     }
 
-    /* Tarjeta mercado: mantener columna vertical */
     .mercado-card { border-radius: 10px; }
     .mercado-foto-wrap { height: 160px; }
     .mercado-card-body { padding: 14px 16px; }
     .mercado-card-footer { padding: 10px 16px 14px; gap: 8px; }
-
-    /* ═══════════════════════════════════════════════════════
-       CLASIFICACIÓN (clasificacion.php)
-       ═══════════════════════════════════════════════════════ */
 
     .clasif-resumen {
         flex-direction: column;
@@ -4002,7 +3967,6 @@ tbody tr:last-child td { border-bottom: none; }
     .resumen-card { padding: 16px 18px; }
     .resumen-valor { font-size: 28px; }
 
-    /* Tabla: ocultar Manager y Carreras */
     .clasif-tabla th.col-piloto,
     .clasif-tabla td.col-piloto,
     .clasif-tabla th.col-carreras,
@@ -4015,11 +3979,6 @@ tbody tr:last-child td { border-bottom: none; }
     .insignia-pos { width: 28px; height: 28px; font-size: 12px; }
     .nombre-equipo-texto { font-size: 13px; }
 
-    /* ═══════════════════════════════════════════════════════
-       RESULTADOS (resultados.php)
-       ═══════════════════════════════════════════════════════ */
-
-    /* Layout sidebar + main → columna */
     .resultados-layout {
         flex-direction: column;
         gap: 16px;
@@ -4028,7 +3987,6 @@ tbody tr:last-child td { border-bottom: none; }
         width: 100%;
         min-width: unset;
     }
-    /* Lista de carreras: scroll horizontal */
     .res-carrera-lista {
         display: flex;
         flex-direction: row;
@@ -4048,16 +4006,10 @@ tbody tr:last-child td { border-bottom: none; }
     .res-carrera-num { font-size: 16px; }
     .res-carrera-info strong { font-size: 11px; white-space: normal; }
 
-    /* Tabla resultados */
     .res-tabla th,
     .res-tabla td { padding: 8px 8px; font-size: 11px; }
-    /* Ocultar columna Q en móvil */
     .res-tabla th:nth-child(4),
     .res-tabla td:nth-child(4) { display: none; }
-
-    /* ═══════════════════════════════════════════════════════
-       LIGAS (ligas.php)
-       ═══════════════════════════════════════════════════════ */
 
     .ligas-acciones-wrap {
         grid-template-columns: 1fr;
@@ -4072,18 +4024,10 @@ tbody tr:last-child td { border-bottom: none; }
         gap: 8px;
     }
 
-    /* ═══════════════════════════════════════════════════════
-       AJUSTES LIGA (ajustes_liga.php)
-       ═══════════════════════════════════════════════════════ */
-
     .ajustes-liga-grid {
         grid-template-columns: 1fr;
         gap: 14px;
     }
-
-    /* ═══════════════════════════════════════════════════════
-       MODALES
-       ═══════════════════════════════════════════════════════ */
 
     .modal-overlay { align-items: flex-end; }
     .modal {
@@ -4096,18 +4040,10 @@ tbody tr:last-child td { border-bottom: none; }
     .modal-contenido { padding: 16px; }
     .modal-piloto-lista { max-height: 45vh; }
 
-    /* ═══════════════════════════════════════════════════════
-       ADMIN PILOTOS (admin_pilotos.php)
-       ═══════════════════════════════════════════════════════ */
-
     .admin-tabla-wrap { overflow-x: auto; }
     .admin-tabla { min-width: 500px; }
     .admin-tabla th,
     .admin-tabla td { padding: 8px 10px; font-size: 12px; }
-
-    /* ═══════════════════════════════════════════════════════
-       AYUDA (ayuda.php)
-       ═══════════════════════════════════════════════════════ */
 
     .ayuda-grid { grid-template-columns: 1fr; }
     .ayuda-card--full { grid-column: 1; }
@@ -4116,13 +4052,8 @@ tbody tr:last-child td { border-bottom: none; }
     .ayuda-hero { flex-direction: column; text-align: center; gap: 16px; }
     .ayuda-hero-texto h2 { font-size: 22px; }
 
-    /* ── Flash messages ─────────────────────────────────────── */
     .flash { margin-bottom: 14px; padding: 12px 14px; font-size: 13px; }
 }
-
-/* ════════════════════════════════════════════════════════════
-   RESPONSIVE EXTRA PEQUEÑO — max-width: 420px
-   ════════════════════════════════════════════════════════════ */
 
 @media (max-width: 420px) {
 
@@ -4136,21 +4067,20 @@ tbody tr:last-child td { border-bottom: none; }
     .tarjeta h3 { font-size: 24px; }
     .resumen-valor { font-size: 24px; }
 
-    /* Stats: 1 columna */
+
     .stats-bar { grid-template-columns: 1fr; }
     .stat-card.stat-proximo { grid-column: 1; }
 
-    /* Tabla movimientos: solo piloto y puntos */
+
     .movimientos th:nth-child(2),
     .movimientos td:nth-child(2) { display: none; }
 
     .contador div { min-width: 42px; padding: 8px; }
     .contador span { font-size: 18px; }
 
-    /* Mercado: foto más pequeña */
+
     .mercado-foto-wrap { height: 130px; }
 
-    /* Tabla clasificación: ocultar Diferencia */
     .clasif-tabla th.col-dif,
     .clasif-tabla td.col-dif { display: none; }
 

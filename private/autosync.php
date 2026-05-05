@@ -5,8 +5,8 @@ require_once __DIR__ . '/puntuacion.php';
 define('AUTOSYNC_INTERVALO_HORAS', 6);
 
 define('AUTOSYNC_MAX_INTENTOS',  3);
-define('AUTOSYNC_REINTENTO_S',   5);   // segundos entre reintentos normales
-define('AUTOSYNC_RATELIMIT_S',  30);   // segundos extra si recibimos 429
+define('AUTOSYNC_REINTENTO_S',   5);
+define('AUTOSYNC_RATELIMIT_S',  30);
 function fetchConReintentos(string $url, array $ctx)
 {
     for ($i = 1; $i <= AUTOSYNC_MAX_INTENTOS; $i++) {

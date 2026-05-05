@@ -136,7 +136,6 @@ include __DIR__ . '/../private/header.php';
 <?php endif; ?>
 
 <?php if ($vistaLiga): ?>
-<!-- ═══════════ DETALLE DE LIGA ═══════════ -->
 <div class="encabezado">
     <p class="panel"><a href="ligas.php" class="volver-link">← Mis Ligas</a></p>
     <h2><?= htmlspecialchars($vistaLiga['nombre']) ?></h2>
@@ -234,7 +233,6 @@ include __DIR__ . '/../private/header.php';
 </div>
 
 <?php else: ?>
-<!-- ═══════════ VISTA PRINCIPAL ═══════════ -->
 <div class="encabezado">
     <p class="panel">Competición privada</p>
     <h2>LIGAS</h2>
@@ -324,7 +322,7 @@ include __DIR__ . '/../private/header.php';
 <div class="ligas-grid">
     <?php foreach ($misLigas as $liga):
         $esCreadorLiga = ((int)$liga['id_creador'] === $idUsuario);
-    $esMiLiga      = $esCreadorLiga; // es miembro si es creador (expandible con liga_miembros)
+    $esMiLiga      = $esCreadorLiga;
     ?>
     <div class="liga-card">
         <div class="liga-card-top">

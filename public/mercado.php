@@ -186,7 +186,6 @@ include __DIR__ . '/../private/header.php';
 <link rel="stylesheet" href="../css/mercado.css">
 <?php endif; ?>
 
-<!-- Stats rápidas -->
 <div class="mercado-stats">
     <div class="mercado-stat">
         <p>Presupuesto</p>
@@ -206,7 +205,6 @@ include __DIR__ . '/../private/header.php';
     </a>
 </div>
 
-<!-- Filtros -->
 <div class="mercado-filtros">
     <form method="GET" action="mercado.php" class="filtros-form">
         <input
@@ -238,7 +236,6 @@ include __DIR__ . '/../private/header.php';
     </form>
 </div>
 
-<!-- Grid de pilotos -->
 <?php
 
 $fotosPilotos = [
@@ -281,7 +278,6 @@ $fotosPilotos = [
 ?>
     <div class="mercado-card <?= $fichado ? 'mercado-card-fichado' : '' ?>" style="border-left: 5px solid <?= htmlspecialchars($color) ?>;">
 
-        <!-- FOTO -->
         <div class="mercado-foto-wrap">
             <?php
                 $partes    = explode(' ', trim($p['nombre']));
@@ -306,13 +302,10 @@ $fotosPilotos = [
             <?php endif; ?>
         </div>
 
-        <!-- FRANJA COLOR ESCUDERÍA -->
         <div class="mercado-card-color" style="background-color:<?= $color ?>;"></div>
 
-        <!-- CUERPO -->
         <div class="mercado-card-body">
 
-            <!-- Número + Escudería + Nombre -->
             <div class="mercado-card-top">
                 <div class="mercado-info">
                     <p class="mercado-escuderia"><?= htmlspecialchars($p['escuderia']) ?></p>
@@ -321,7 +314,6 @@ $fotosPilotos = [
                 <span class="mercado-num-badge">#<?= (int)$p['numero'] ?></span>
             </div>
 
-            <!-- PRECIO + PUNTOS — bloque de stats separado y visible -->
             <div class="mercado-stats-row">
                 <div class="mercado-stat-mini">
                     <span class="mercado-stat-label">Precio</span>
@@ -347,7 +339,6 @@ $fotosPilotos = [
                 </div>
             </div>
 
-            <!-- BOTÓN -->
             <div class="mercado-card-footer">
                 <?php if ($fichado): ?>
                     <span class="mercado-badge-fichado"><?= icono('check', 'icono-inline', 14) ?> Fichado</span>
@@ -374,9 +365,6 @@ $fotosPilotos = [
 </div>
 <?php endif; ?>
 
-<!-- ═══════════════════════════════════════════════
-     MERCADO DE ESCUDERÍAS
-═══════════════════════════════════════════════ -->
 <?php
 $logosEscuderia = [
     'Oracle Red Bull Racing'             => 'https://media.formula1.com/image/upload/f_auto,c_limit,q_auto,w_1320/content/dam/fom-website/teams/2025/red-bull-racing.png',
@@ -414,7 +402,6 @@ $logosEscuderia = [
     <div class="mercado-card <?= $fichada ? 'mercado-card-fichado' : '' ?>"
          style="border-left: 5px solid <?= $color ?>;">
 
-        <!-- IMAGEN ESCUDERÍA -->
         <div class="mercado-foto-wrap" style="background: linear-gradient(160deg, #0d0d0d 40%, <?= $color ?>18 100%);">
             <?php if ($logo): ?>
                 <img src="<?= $logo ?>"

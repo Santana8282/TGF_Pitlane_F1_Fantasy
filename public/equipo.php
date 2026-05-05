@@ -17,7 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $accion   = $_POST['accion']    ?? '';
     $idPiloto = (int) ($_POST['id_piloto'] ?? 0);
-    $slot     = (int) ($_POST['slot']      ?? 0);   // 1 = Capitán ×2, 2 = Segundo Piloto
+    $slot     = (int) ($_POST['slot']      ?? 0);  
 
     if ($accion === 'añadir' && $idPiloto > 0 && in_array($slot, [1, 2])) {
 
@@ -80,13 +80,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $stmtNom->execute([$idPiloto]);
                 $nomPiloto = $stmtNom->fetchColumn();
                 $costeMsg  = $res['coste'] > 0 ? ' (-' . $res['coste'] . ' pts en la próxima carrera)' : '';
-                $equipo['presupuesto'] -= 0; // recargado abajo
+                $equipo['presupuesto'] -= 0; 
                 $flash = ['tipo' => 'ok', 'msg' => '¡' . htmlspecialchars($nomPiloto) . ' fichado!' . $costeMsg];
             } else {
                 $flash = ['tipo' => 'error', 'msg' => $res['error']];
             }
         }
-        } // cierre else ventanaMercadoAbierta
+        } 
 
     } elseif ($accion === 'liberar' && $idPiloto > 0) {
 
@@ -276,18 +276,12 @@ include __DIR__ . '/../private/header.php';
 </div>
 <?php endif; ?>
 
-<!-- ==============================
-     ENCABEZADO
-============================== -->
 <div class="equipo-encabezado">
     <p class="panel">// Garaje Principal</p>
     <h2>MI EQUIPO</h2>
     <p class="subtitulo">Temporada 2026 &nbsp;·&nbsp; <?= htmlspecialchars($equipo['nombre_equipo']) ?></p>
 </div>
 
-<!-- ==============================
-     STATS BAR
-============================== -->
 <div class="stats-bar">
 
     <div class="stat-card">
@@ -330,9 +324,6 @@ include __DIR__ . '/../private/header.php';
 
 </div>
 
-<!-- ======================================================
-     GARAJE — ALINEACIÓN ACTIVA + ESCUDERÍA (una fila)
-======================================================= -->
 <div class="seccion-titulo" style="margin-bottom: 28px;">
     <div class="linea"></div>
     <h3>Garaje Principal <span class="seccion-sub">// Alineación activa</span></h3>
@@ -345,7 +336,7 @@ include __DIR__ . '/../private/header.php';
 ?>
 
     <?php if ($pilotSlot): ?>
-    <!-- SLOT <?= $numSlot ?> OCUPADO -->
+    <?= $numSlot ?>
     <div class="slot-piloto ocupado">
         <?php if ($pilotSlot['imagen_url']): ?>
         <div class="slot-bg-img" style="background-image: url('<?= htmlspecialchars($pilotSlot['imagen_url']) ?>')"></div>
@@ -387,7 +378,7 @@ include __DIR__ . '/../private/header.php';
     </div>
 
     <?php else: ?>
-    <!-- SLOT <?= $numSlot ?> VACÍO -->
+    <?= $numSlot ?>
     <div class="slot-piloto vacio" onclick="abrirModal(<?= $numSlot ?>)" title="Clic para asignar piloto">
         <div class="slot-bg-pattern"></div>
         <div class="slot-placeholder">
@@ -405,7 +396,7 @@ include __DIR__ . '/../private/header.php';
 
 <?php endforeach; ?>
 
-    <!-- SLOT ESCUDERÍA -->
+
     <?php if ($miEscuderia): ?>
     <?php
         $escColor = $coloresEscuderia[$miEscuderia['nombre']] ?? '#888888';
@@ -415,7 +406,6 @@ include __DIR__ . '/../private/header.php';
         <div class="slot-overlay" style="background: linear-gradient(to top, <?= $escColor ?>33 0%, transparent 60%);"></div>
         <div class="badge-activo" style="background:<?= $escColor ?>;">Escudería</div>
 
-        <!-- Logo del coche/escudería -->
         <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding:40px 12px;">
             <?php if ($escLogo): ?>
             <img src="<?= htmlspecialchars($escLogo) ?>"
@@ -464,7 +454,6 @@ include __DIR__ . '/../private/header.php';
     </div>
 
     <?php else: ?>
-    <!-- SLOT ESCUDERÍA VACÍO -->
     <div class="slot-piloto slot-escuderia vacio" onclick="abrirModalFicharEscuderia()" title="Clic para fichar escudería">
         <div class="slot-bg-pattern"></div>
         <div class="slot-placeholder">
@@ -482,9 +471,6 @@ include __DIR__ . '/../private/header.php';
 
 </div>
 
-<!-- ==============================
-     MIS PILOTOS + ESCUDERÍA
-============================== -->
 <div class="seccion-header">
     <div class="seccion-titulo" style="margin-bottom: 0;">
         <div class="linea" style="background-color: #333;"></div>
@@ -595,7 +581,6 @@ include __DIR__ . '/../private/header.php';
             <span class="piloto-pts-valor"><?= $ptsPil > 0 ? '+' : '' ?><?= $ptsPil ?></span>
         </div>
 
-        <!-- Botones asignar a slot -->
         <?php if (!$enSlot): ?>
         <div style="display:flex; gap:6px; margin-top:10px;">
             <?php if (!$slot1Id): ?>
@@ -619,7 +604,6 @@ include __DIR__ . '/../private/header.php';
             <?php endif; ?>
         </div>
         <?php else: ?>
-        <!-- Quitar del slot -->
         <form method="post" style="margin-top:10px;">
             <input type="hidden" name="accion"    value="quitar">
             <input type="hidden" name="slot"      value="<?= $enSlot1 ? '1' : '2' ?>">
@@ -630,7 +614,6 @@ include __DIR__ . '/../private/header.php';
         </form>
         <?php endif; ?>
 
-        <!-- Liberar piloto -->
         <button type="button" class="btn-quitar-card" style="margin-top:6px; width:100%;"
                 onclick="abrirModalLiberar(
                     <?= (int)$p['id_piloto'] ?>,
@@ -643,7 +626,6 @@ include __DIR__ . '/../private/header.php';
     </div>
     <?php endforeach; ?>
 
-    <!-- Slots vacíos decorativos -->
     <?php for ($i = 0; $i < max(0, min(4, 5 - count($misPilotos))); $i++): ?>
     <div class="piloto-card-vacio" onclick="abrirModalFichar()">
         <div class="add-icon">＋</div>
@@ -653,13 +635,6 @@ include __DIR__ . '/../private/header.php';
 
 </div>
 
-<!-- ==============================
-     TICKER DE MERCADO
-============================== -->
-
-<!-- ============================================================
-     MODAL 1 — Asignar piloto de la plantilla a un slot
-     =========================================================== -->
 <div class="modal-overlay" id="modalSlot">
     <div class="modal">
         <div class="modal-header">
@@ -706,9 +681,6 @@ include __DIR__ . '/../private/header.php';
     </div>
 </div>
 
-<!-- ============================================================
-     MODAL 2 — Fichar piloto del mercado
-     =========================================================== -->
 <div class="modal-overlay" id="modalFichar">
     <div class="modal">
         <div class="modal-header">
@@ -753,9 +725,6 @@ include __DIR__ . '/../private/header.php';
     </div>
 </div>
 
-<!-- ============================================================
-     MODAL 3 — Confirmar liberación de piloto
-     =========================================================== -->
 <div class="modal-overlay" id="modalLiberar">
     <div class="modal" style="max-width: 420px;">
         <div class="modal-header">
@@ -767,7 +736,6 @@ include __DIR__ . '/../private/header.php';
         </div>
         <div class="modal-body" style="padding: 28px;">
 
-            <!-- Info del piloto -->
             <div style="display:flex; align-items:center; gap:14px; padding:16px; background:#0f0f0f; border:1px solid #1a1a1a; margin-bottom:24px;">
                 <div style="width:5px; height:48px; background:var(--color-rojo); border-radius:2px; flex-shrink:0;" id="liberarColor"></div>
                 <div>
@@ -776,7 +744,6 @@ include __DIR__ . '/../private/header.php';
                 </div>
             </div>
 
-            <!-- Advertencia -->
             <p style="font-size:13px; color:#aaa; line-height:1.6; margin-bottom:10px;">
                 Este piloto será <strong style="color:#fff;">eliminado de tu plantilla</strong>.
                 Recibirás el <strong style="color:var(--color-verde);">80% de su valor</strong> como compensación:
@@ -785,7 +752,6 @@ include __DIR__ . '/../private/header.php';
                 +<span id="liberarDevolucion">0</span>M€
             </div>
 
-            <!-- Botones -->
             <div style="display:flex; gap:10px;">
                 <button type="button"
                         style="flex:1; padding:12px; background:none; border:1px solid #333; color:#888; font-family:inherit; font-size:12px; font-weight:900; text-transform:uppercase; letter-spacing:1px; cursor:pointer; transition:all 0.2s;"
@@ -810,9 +776,6 @@ include __DIR__ . '/../private/header.php';
     </div>
 </div>
 
-<!-- ============================================================
-     MODAL 4 — Fichar escudería
-     =========================================================== -->
 <div class="modal-overlay" id="modalFicharEscuderia">
     <div class="modal">
         <div class="modal-header">
@@ -860,9 +823,6 @@ include __DIR__ . '/../private/header.php';
     </div>
 </div>
 
-<!-- ============================================================
-     MODAL 5 — Confirmar liberación de escudería
-     =========================================================== -->
 <div class="modal-overlay" id="modalLiberarEscuderia">
     <div class="modal" style="max-width: 420px;">
         <div class="modal-header">
@@ -906,9 +866,6 @@ include __DIR__ . '/../private/header.php';
     </div>
 </div>
 
-<!-- ==============================
-     JAVASCRIPT
-============================== -->
 <script src="../js/equipo.js"></script>
 
 <?php include __DIR__ . '/../private/footer.php'; ?>

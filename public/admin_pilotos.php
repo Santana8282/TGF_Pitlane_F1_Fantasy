@@ -193,7 +193,6 @@ include __DIR__ . '/../private/header.php';
     </table>
 </div>
 
-<!-- ═══════════════════ MODAL EDITAR / AÑADIR ═══════════════════ -->
 <div id="admin-modal-overlay" class="ap-overlay">
     <div class="ap-modal" id="ap-modal-box">
         <button class="ap-modal-close" onclick="cerrarModal()">&times;</button>
@@ -248,7 +247,6 @@ include __DIR__ . '/../private/header.php';
     </div>
 </div>
 
-<!-- ═══════════════════ MODAL ELIMINAR ═══════════════════ -->
 <div id="admin-confirm-overlay" class="ap-overlay">
     <div class="del-modal">
         <button class="ap-modal-close del-close-btn" onclick="cerrarConfirm()">&times;</button>

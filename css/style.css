@@ -1516,6 +1516,9 @@ tbody tr:hover td {
 .col-pts  { text-align: right; font-weight: 900; }
 .col-dif  { text-align: right; width: 130px; }
 .col-carreras { text-align: center; width: 100px; }
+.clasif-tabla th.col-pts { text-align: right; }
+.clasif-tabla th.col-dif { text-align: right; }
+.clasif-tabla th.col-carreras { text-align: center; }
 
 .trofeo {
     font-size: 22px;

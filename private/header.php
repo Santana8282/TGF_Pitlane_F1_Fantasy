@@ -9,7 +9,7 @@ require_once __DIR__ . '/iconos.php';
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= htmlspecialchars($tituloPagina) ?> — F1 Fantasy</title>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/style.css?v=<?= filemtime(__DIR__ . '/../css/style.css') ?>">
 </head>
 <body>
 <div class="contenedor">

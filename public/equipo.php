@@ -336,7 +336,6 @@ include __DIR__ . '/../private/header.php';
 ?>
 
     <?php if ($pilotSlot): ?>
-    <?= $numSlot ?>
     <div class="slot-piloto ocupado">
         <?php if ($pilotSlot['imagen_url']): ?>
         <div class="slot-bg-img" style="background-image: url('<?= htmlspecialchars($pilotSlot['imagen_url']) ?>')"></div>
@@ -378,7 +377,6 @@ include __DIR__ . '/../private/header.php';
     </div>
 
     <?php else: ?>
-    <?= $numSlot ?>
     <div class="slot-piloto vacio" onclick="abrirModal(<?= $numSlot ?>)" title="Clic para asignar piloto">
         <div class="slot-bg-pattern"></div>
         <div class="slot-placeholder">

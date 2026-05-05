@@ -2175,12 +2175,14 @@ tbody tr:last-child td { border-bottom: none; }
     font-size: 10px;
     letter-spacing: 2px;
     padding: 12px 18px;
+    text-align: left;
 }
 .clasif-tabla td { color: #fff; font-size: 14px; padding: 15px 18px; }
-.clasif-tabla td.col-pts { text-align: right; font-weight: 900; }
-.clasif-tabla td.col-dif { text-align: right; }
-.clasif-tabla th.col-pts { text-align: right; }
-.clasif-tabla th.col-dif { text-align: right; }
+.clasif-tabla td.col-pts { text-align: right !important; font-weight: 900; }
+.clasif-tabla td.col-dif { text-align: right !important; }
+.clasif-tabla th.col-pts { text-align: right !important; }
+.clasif-tabla th.col-dif { text-align: right !important; }
+.clasif-tabla th.col-carreras { text-align: center !important; }
 .clasif-tabla td strong { color: #fff; }
 .num-pos { color: var(--color-texto-suave); font-size: 14px; }
 .pts-valor { color: #fff; font-size: 15px; }

@@ -11,7 +11,6 @@ $isAdmin = esAdmin();
 
 if ($isAdmin && $_SERVER['REQUEST_METHOD'] === 'POST') {
 
-    // Limpieza de puntos mal asignados
     if (($_POST['accion'] ?? '') === 'limpiar_puntos') {
         $borrados = limpiarPuntosMalAsignados();
         $flash = ['tipo' => 'ok', 'msg' => "Limpieza completada. Registros incorrectos eliminados: {$borrados}. Puntos recalculados."];

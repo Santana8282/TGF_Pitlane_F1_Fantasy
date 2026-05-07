@@ -41,7 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['accion'] ?? '') === 'ficha
             }
         }
 
-        } // cierre else ventanaMercadoAbierta
+        } 
     }
 
     $stmtPres = $pdo->prepare("SELECT presupuesto FROM equipos_fantasy WHERE id_equipo = ?");
@@ -109,7 +109,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $flash = ['tipo' => 'error', 'msg' => $res['error']];
             }
         }
-        } // cierre else ventanaMercadoAbierta
+        } 
     } elseif ($accionEsc === 'liberar_escuderia') {
         $idEsc = (int) ($_POST['id_escuderia'] ?? 0);
         if ($idEsc > 0) {
@@ -146,17 +146,17 @@ foreach ($stmtPtsEsc->fetchAll() as $row) {
 }
 
 $coloresEscuderia = [
-    'McLaren Mastercard F1 Team'        => '#FF8700', // naranja McLaren
-    'Mercedes-AMG Petronas F1 Team'     => '#00F5C3', // turquesa brillante Mercedes
-    'Oracle Red Bull Racing'            => '#0D1B8E', // azul marino Red Bull
-    'Scuderia Ferrari HP'               => '#DC0000', // rojo Ferrari
-    'Atlassian Williams F1 Team'        => '#00CFFF', // azul cielo claro Williams
-    'Visa Cash App Racing Bulls F1 Team'=> '#8B5CF6', // violeta Racing Bulls
-    'Aston Martin Aramco F1 Team'       => '#006F62', // verde botella Aston Martin
-    'TGR Haas F1 Team'                  => '#9B9B9B', // gris grafito Haas
-    'Audi Revolut F1 Team'              => '#1A1A1A', // negro Audi
-    'BWT Alpine F1 Team'                => '#FF87BC', // rosa Alpine
-    'Cadillac Formula 1 Team'           => '#C9A84C', // dorado Cadillac
+    'McLaren Mastercard F1 Team'        => '#FF8700', 
+    'Mercedes-AMG Petronas F1 Team'     => '#00F5C3', 
+    'Oracle Red Bull Racing'            => '#0D1B8E', 
+    'Scuderia Ferrari HP'               => '#DC0000', 
+    'Atlassian Williams F1 Team'        => '#00CFFF', 
+    'Visa Cash App Racing Bulls F1 Team'=> '#8B5CF6', 
+    'Aston Martin Aramco F1 Team'       => '#006F62', 
+    'TGR Haas F1 Team'                  => '#9B9B9B', 
+    'Audi Revolut F1 Team'              => '#1A1A1A', 
+    'BWT Alpine F1 Team'                => '#FF87BC', 
+    'Cadillac Formula 1 Team'           => '#C9A84C', 
 ];
 
 $presupuesto = (int) $equipo['presupuesto'];

@@ -1,31 +1,5 @@
--- phpMyAdmin SQL Dump
--- version 5.2.3
--- https://www.phpmyadmin.net/
---
--- Servidor: localhost
--- Tiempo de generación: 21-04-2026 a las 08:27:56
--- Versión del servidor: 8.0.45
--- Versión de PHP: 8.2.30
-
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-START TRANSACTION;
-SET time_zone = "+00:00";
-
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
-
---
--- Base de datos: `pitlane_f1`
---
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `carreras`
---
+CREATE DATABASE IF NOT EXISTS `pitlane_f1` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+USE `pitlane_f1`;
 
 CREATE TABLE `carreras` (
   `id_carrera` int NOT NULL,
@@ -35,10 +9,6 @@ CREATE TABLE `carreras` (
   `circuito` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `fecha` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Volcado de datos para la tabla `carreras`
---
 
 INSERT INTO `carreras` (`id_carrera`, `id_temporada`, `numero_carrera`, `nombre`, `circuito`, `fecha`) VALUES
 (1, 1, 1, 'Gran Premio de Australia', 'Albert Park', '2026-03-08'),
@@ -64,23 +34,11 @@ INSERT INTO `carreras` (`id_carrera`, `id_temporada`, `numero_carrera`, `nombre`
 (21, 1, 21, 'Gran Premio de Qatar', 'Lusail', '2026-11-29'),
 (22, 1, 22, 'Gran Premio de Abu Dabi', 'Yas Marina', '2026-12-06');
 
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `clasificacion`
---
-
 CREATE TABLE `clasificacion` (
   `id_clasificacion` int NOT NULL,
   `id_equipo` int NOT NULL,
   `puntos_totales` int DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `equipos_fantasy`
---
 
 CREATE TABLE `equipos_fantasy` (
   `id_equipo` int NOT NULL,
@@ -93,19 +51,9 @@ CREATE TABLE `equipos_fantasy` (
   `cambios_usados` int DEFAULT '0' COMMENT 'Cambios usados esta ventana'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Volcado de datos para la tabla `equipos_fantasy`
---
-
 INSERT INTO `equipos_fantasy` (`id_equipo`, `id_usuario`, `nombre_equipo`, `presupuesto`, `fecha_creacion`, `puntos_jornada`, `cambios_disponibles`, `cambios_usados`) VALUES
 (1, 1, 'Equipo de Daniel', 5000000, '2026-03-23 09:57:26', 5, 3, 0),
 (2, 2, 'Equipo de usuario', 40000000, '2026-04-21 10:02:33', 0, 3, 0);
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `escuderias`
---
 
 CREATE TABLE `escuderias` (
   `id_escuderia` int NOT NULL,
@@ -113,10 +61,6 @@ CREATE TABLE `escuderias` (
   `precio_base` int NOT NULL,
   `logo_url` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Volcado de datos para la tabla `escuderias`
---
 
 INSERT INTO `escuderias` (`id_escuderia`, `nombre`, `precio_base`, `logo_url`) VALUES
 (1, 'Oracle Red Bull Racing', 20000000, NULL),
@@ -131,12 +75,6 @@ INSERT INTO `escuderias` (`id_escuderia`, `nombre`, `precio_base`, `logo_url`) V
 (10, 'Audi Revolut F1 Team', 13000000, 'https://media.formula1.com/image/upload/f_auto,c_limit,q_auto,w_1320/content/dam/fom-website/teams/2026/audi.png'),
 (11, 'Cadillac Formula 1 Team', 12000000, 'https://media.formula1.com/image/upload/f_auto,c_limit,q_auto,w_1320/content/dam/fom-website/teams/2026/cadillac.png');
 
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `escuderia_equipo_fantasy`
---
-
 CREATE TABLE `escuderia_equipo_fantasy` (
   `id_relacion` int NOT NULL,
   `id_equipo` int NOT NULL,
@@ -144,12 +82,6 @@ CREATE TABLE `escuderia_equipo_fantasy` (
   `fecha_inclusion` datetime DEFAULT CURRENT_TIMESTAMP,
   `slot` int DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `historial_plantilla`
---
 
 CREATE TABLE `historial_plantilla` (
   `id` int NOT NULL,
@@ -162,12 +94,6 @@ CREATE TABLE `historial_plantilla` (
   `fecha` datetime DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `historial_precios`
---
-
 CREATE TABLE `historial_precios` (
   `id` int NOT NULL,
   `id_piloto` int NOT NULL,
@@ -177,10 +103,6 @@ CREATE TABLE `historial_precios` (
   `puntos_carrera` int NOT NULL DEFAULT '0' COMMENT 'Puntos que generó el cambio',
   `fecha` datetime DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Volcado de datos para la tabla `historial_precios`
---
 
 INSERT INTO `historial_precios` (`id`, `id_piloto`, `id_carrera`, `precio`, `variacion`, `puntos_carrera`, `fecha`) VALUES
 (1, 1, 3, 28400000, 400000, 22, '2026-04-21 10:23:07'),
@@ -250,12 +172,6 @@ INSERT INTO `historial_precios` (`id`, `id_piloto`, `id_carrera`, `precio`, `var
 (65, 21, 1, 15000000, -2000000, -10, '2026-04-21 10:23:25'),
 (66, 22, 1, 8000000, -2000000, -10, '2026-04-21 10:23:25');
 
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `ligas`
---
-
 CREATE TABLE `ligas` (
   `id_liga` int NOT NULL,
   `nombre` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
@@ -266,18 +182,8 @@ CREATE TABLE `ligas` (
   `activa` tinyint(1) DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Volcado de datos para la tabla `ligas`
---
-
 INSERT INTO `ligas` (`id_liga`, `nombre`, `descripcion`, `codigo_invitacion`, `id_creador`, `fecha_creacion`, `activa`) VALUES
 (1, 'Liga de ejemplo', 'Ejemplo', 'FE0EC86C', 1, '2026-04-21 10:24:26', 1);
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `liga_miembros`
---
 
 CREATE TABLE `liga_miembros` (
   `id` int NOT NULL,
@@ -286,19 +192,9 @@ CREATE TABLE `liga_miembros` (
   `fecha_union` datetime DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Volcado de datos para la tabla `liga_miembros`
---
-
 INSERT INTO `liga_miembros` (`id`, `id_liga`, `id_equipo`, `fecha_union`) VALUES
 (1, 1, 1, '2026-04-21 10:24:26'),
 (2, 1, 2, '2026-04-21 10:25:09');
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `pilotos`
---
 
 CREATE TABLE `pilotos` (
   `id_piloto` int NOT NULL,
@@ -311,10 +207,6 @@ CREATE TABLE `pilotos` (
   `precio_anterior` int NOT NULL DEFAULT '0' COMMENT 'Precio antes de la última actualización',
   `imagen_url` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Volcado de datos para la tabla `pilotos`
---
 
 INSERT INTO `pilotos` (`id_piloto`, `nombre`, `numero`, `nacionalidad`, `id_escuderia`, `precio`, `precio_inicial`, `precio_anterior`, `imagen_url`) VALUES
 (1, 'Max Verstappen', 3, 'Neerlandés', 1, 28400000, 28000000, 25400000, 'https://media.formula1.com/image/upload/f_auto,c_limit,q_auto,w_1320/content/dam/fom-website/drivers/M/MAXVER01_Max_Verstappen/maxver01.png'),
@@ -340,12 +232,6 @@ INSERT INTO `pilotos` (`id_piloto`, `nombre`, `numero`, `nacionalidad`, `id_escu
 (21, 'Sergio Pérez', 11, 'Mexicano', 11, 15000000, 14000000, 17000000, 'https://media.formula1.com/image/upload/f_auto,c_limit,q_auto,w_1320/content/dam/fom-website/drivers/S/SERPER01_Sergio_Perez/serper01.png'),
 (22, 'Valtteri Bottas', 77, 'Finlandés', 11, 8000000, 10000000, 10000000, 'https://media.formula1.com/image/upload/f_auto,c_limit,q_auto,w_1320/content/dam/fom-website/drivers/V/VALBOT01_Valtteri_Bottas/valbot01.png');
 
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `pilotos_equipo_fantasy`
---
-
 CREATE TABLE `pilotos_equipo_fantasy` (
   `id_piloto_equipo` int NOT NULL,
   `id_equipo` int NOT NULL,
@@ -355,19 +241,9 @@ CREATE TABLE `pilotos_equipo_fantasy` (
   `slot` int DEFAULT NULL COMMENT 'Posición en plantilla 1-5'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Volcado de datos para la tabla `pilotos_equipo_fantasy`
---
-
 INSERT INTO `pilotos_equipo_fantasy` (`id_piloto_equipo`, `id_equipo`, `id_piloto`, `fecha_inclusion`, `es_capitan`, `slot`) VALUES
 (1, 1, 9, '2026-03-23 10:13:44', 1, 1),
 (2, 1, 3, '2026-03-23 10:13:50', 0, 2);
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `puntos_desglose`
---
 
 CREATE TABLE `puntos_desglose` (
   `id` int NOT NULL,
@@ -376,10 +252,6 @@ CREATE TABLE `puntos_desglose` (
   `puntos` int NOT NULL COMMENT 'Puede ser negativo',
   `descripcion` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Volcado de datos para la tabla `puntos_desglose`
---
 
 INSERT INTO `puntos_desglose` (`id`, `id_resultado`, `criterio`, `puntos`, `descripcion`) VALUES
 (502, 190, 'posicion', 25, 'P1 en carrera'),
@@ -550,12 +422,6 @@ INSERT INTO `puntos_desglose` (`id`, `id_resultado`, `criterio`, `puntos`, `desc
 (667, 252, 'q2', 2, 'Q2 — P11 parrilla'),
 (668, 252, 'abandono', -10, 'Abandono / DNF');
 
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `puntos_escuderia_fantasy`
---
-
 CREATE TABLE `puntos_escuderia_fantasy` (
   `id` int NOT NULL,
   `id_equipo` int NOT NULL,
@@ -564,12 +430,6 @@ CREATE TABLE `puntos_escuderia_fantasy` (
   `puntos` int NOT NULL DEFAULT '0',
   `detalle` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `puntos_fantasy`
---
 
 CREATE TABLE `puntos_fantasy` (
   `id_punto` int NOT NULL,
@@ -583,10 +443,6 @@ CREATE TABLE `puntos_fantasy` (
   `es_escuderia` tinyint(1) DEFAULT '0' COMMENT 'Reservado (no usado)'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Volcado de datos para la tabla `puntos_fantasy`
---
-
 INSERT INTO `puntos_fantasy` (`id_punto`, `id_equipo`, `id_piloto`, `id_carrera`, `puntos`, `detalle`, `es_capitan`, `puntos_base`, `es_escuderia`) VALUES
 (19, 1, 3, 3, 25, 'P3 en carrera | Q3 — P4 parrilla | Completó la carrera | 1 pos. ganada(s) (+3 pts)', 0, 25, 0),
 (20, 1, 9, 3, -20, 'Abandono / DNF', 1, -10, 0),
@@ -594,12 +450,6 @@ INSERT INTO `puntos_fantasy` (`id_punto`, `id_equipo`, `id_piloto`, `id_carrera`
 (22, 1, 9, 2, -20, 'Abandono / DNF', 1, -10, 0),
 (23, 1, 3, 1, 25, 'P3 en carrera | Q3 — P4 parrilla | Completó la carrera | 1 pos. ganada(s) (+3 pts)', 0, 25, 0),
 (24, 1, 9, 1, -20, 'Abandono / DNF', 1, -10, 0);
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `puntos_fantasy_carrera`
---
 
 CREATE TABLE `puntos_fantasy_carrera` (
   `id` int NOT NULL,
@@ -612,10 +462,6 @@ CREATE TABLE `puntos_fantasy_carrera` (
   `posicion_jornada` int DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Volcado de datos para la tabla `puntos_fantasy_carrera`
---
-
 INSERT INTO `puntos_fantasy_carrera` (`id`, `id_equipo`, `id_carrera`, `puntos_brutos`, `bonus_capitan`, `penalizacion`, `puntos_total`, `posicion_jornada`) VALUES
 (1, 1, 3, 15, -10, 0, 5, 1),
 (2, 1, 2, 9, -10, 0, -1, 2),
@@ -623,12 +469,6 @@ INSERT INTO `puntos_fantasy_carrera` (`id`, `id_equipo`, `id_carrera`, `puntos_b
 (11, 2, 3, 0, 0, 0, 0, 2),
 (13, 2, 2, 0, 0, 0, 0, 1),
 (15, 2, 1, 0, 0, 0, 0, 2);
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `resultados_carrera`
---
 
 CREATE TABLE `resultados_carrera` (
   `id_resultado` int NOT NULL,
@@ -648,10 +488,6 @@ CREATE TABLE `resultados_carrera` (
   `fuente_datos` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT 'manual' COMMENT 'manual|api_jolpica|api_ergast',
   `puntos_fantasy` int NOT NULL DEFAULT '0' COMMENT 'Puntos fantasy calculados para este piloto en esta carrera'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Volcado de datos para la tabla `resultados_carrera`
---
 
 INSERT INTO `resultados_carrera` (`id_resultado`, `id_carrera`, `id_piloto`, `posicion`, `puntos_oficiales`, `vuelta_rapida`, `estado`, `posicion_salida`, `adelantamientos`, `banderas_amarillas`, `banderas_rojas`, `penalizaciones`, `mejor_sector`, `pole_position`, `fuente_datos`, `puntos_fantasy`) VALUES
 (190, 3, 6, 1, 25, 1, 'finished', 1, 0, 0, 0, 0, 0, 1, 'api_jolpica', 47),
@@ -718,12 +554,6 @@ INSERT INTO `resultados_carrera` (`id_resultado`, `id_carrera`, `id_piloto`, `po
 (251, 1, 8, 21, 0, 0, 'dnf', 5, 0, 0, 0, 0, 0, 0, 'api_jolpica', -5),
 (252, 1, 19, 22, 0, 0, 'dnf', 11, 0, 0, 0, 0, 0, 0, 'api_jolpica', -8);
 
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `sync_log`
---
-
 CREATE TABLE `sync_log` (
   `id` int NOT NULL,
   `id_carrera` int NOT NULL,
@@ -731,10 +561,6 @@ CREATE TABLE `sync_log` (
   `estado` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT 'ok' COMMENT 'ok|error|parcial',
   `mensaje` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Volcado de datos para la tabla `sync_log`
---
 
 INSERT INTO `sync_log` (`id`, `id_carrera`, `fecha_sync`, `estado`, `mensaje`) VALUES
 (1, 3, '2026-04-20 10:21:30', 'ok', 'Procesados: 21, Errores: 0'),
@@ -750,30 +576,14 @@ INSERT INTO `sync_log` (`id`, `id_carrera`, `fecha_sync`, `estado`, `mensaje`) V
 (11, 2, '2026-04-21 10:23:12', 'ok', 'Procesados: 21, Errores: 0'),
 (12, 1, '2026-04-21 10:23:25', 'ok', 'Procesados: 21, Errores: 0');
 
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `temporadas`
---
-
 CREATE TABLE `temporadas` (
   `id_temporada` int NOT NULL,
   `anio` int NOT NULL,
   `activa` tinyint DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Volcado de datos para la tabla `temporadas`
---
-
 INSERT INTO `temporadas` (`id_temporada`, `anio`, `activa`) VALUES
 (1, 2026, 1);
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `usuarios`
---
 
 CREATE TABLE `usuarios` (
   `id_usuario` int NOT NULL,
@@ -784,19 +594,9 @@ CREATE TABLE `usuarios` (
   `rol` enum('admin','usuario') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT 'usuario'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Volcado de datos para la tabla `usuarios`
---
-
 INSERT INTO `usuarios` (`id_usuario`, `nombre`, `correo`, `contrasena_hash`, `fecha_registro`, `rol`) VALUES
 (1, 'Daniel', 'ejemplo@ejemplo.com', '$2y$12$nynXzVUzSSmush58tA1gzOk8/FCFEYbNx9ZgCWI08H9yCPRrKSqOi', '2026-03-23 09:57:26', 'admin'),
 (2, 'usuario', 'usuario@usuario.com', '$2y$12$O9FNGBjuA.qyflZ54piRFefOVJDnUfB9hPeBtckRDAPRJJeKEs5VC', '2026-04-21 10:02:33', 'usuario');
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `ventana_mercado`
---
 
 CREATE TABLE `ventana_mercado` (
   `id` int NOT NULL,
@@ -806,10 +606,6 @@ CREATE TABLE `ventana_mercado` (
   `cambios_gratis` int DEFAULT '3' COMMENT 'Cambios gratuitos en esta ventana',
   `coste_extra` int DEFAULT '4' COMMENT 'Puntos perdidos por cambio extra'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Volcado de datos para la tabla `ventana_mercado`
---
 
 INSERT INTO `ventana_mercado` (`id`, `id_carrera_desde`, `id_carrera_hasta`, `abierto`, `cambios_gratis`, `coste_extra`) VALUES
 (1, 1, 2, 1, 3, 4),
@@ -836,366 +632,196 @@ INSERT INTO `ventana_mercado` (`id`, `id_carrera_desde`, `id_carrera_hasta`, `ab
 (22, 22, 23, 1, 3, 4),
 (23, 23, 24, 1, 3, 4);
 
---
--- Índices para tablas volcadas
---
-
---
--- Indices de la tabla `carreras`
---
 ALTER TABLE `carreras`
   ADD PRIMARY KEY (`id_carrera`),
   ADD KEY `id_temporada` (`id_temporada`);
 
---
--- Indices de la tabla `clasificacion`
---
 ALTER TABLE `clasificacion`
   ADD PRIMARY KEY (`id_clasificacion`),
   ADD UNIQUE KEY `id_equipo` (`id_equipo`);
 
---
--- Indices de la tabla `equipos_fantasy`
---
 ALTER TABLE `equipos_fantasy`
   ADD PRIMARY KEY (`id_equipo`),
   ADD KEY `id_usuario` (`id_usuario`);
 
---
--- Indices de la tabla `escuderias`
---
 ALTER TABLE `escuderias`
   ADD PRIMARY KEY (`id_escuderia`);
 
---
--- Indices de la tabla `escuderia_equipo_fantasy`
---
 ALTER TABLE `escuderia_equipo_fantasy`
   ADD PRIMARY KEY (`id_relacion`),
   ADD KEY `id_equipo` (`id_equipo`),
   ADD KEY `id_escuderia` (`id_escuderia`);
 
---
--- Indices de la tabla `historial_plantilla`
---
 ALTER TABLE `historial_plantilla`
   ADD PRIMARY KEY (`id`),
   ADD KEY `id_equipo` (`id_equipo`),
   ADD KEY `id_carrera` (`id_carrera`);
 
---
--- Indices de la tabla `historial_precios`
---
 ALTER TABLE `historial_precios`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `piloto_carrera` (`id_piloto`,`id_carrera`),
   ADD KEY `id_piloto` (`id_piloto`),
   ADD KEY `id_carrera` (`id_carrera`);
 
---
--- Indices de la tabla `ligas`
---
 ALTER TABLE `ligas`
   ADD PRIMARY KEY (`id_liga`),
   ADD UNIQUE KEY `codigo_invitacion` (`codigo_invitacion`),
   ADD KEY `id_creador` (`id_creador`);
 
---
--- Indices de la tabla `liga_miembros`
---
 ALTER TABLE `liga_miembros`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `liga_equipo` (`id_liga`,`id_equipo`),
   ADD KEY `id_liga` (`id_liga`),
   ADD KEY `id_equipo` (`id_equipo`);
 
---
--- Indices de la tabla `pilotos`
---
 ALTER TABLE `pilotos`
   ADD PRIMARY KEY (`id_piloto`),
   ADD KEY `id_escuderia` (`id_escuderia`);
 
---
--- Indices de la tabla `pilotos_equipo_fantasy`
---
 ALTER TABLE `pilotos_equipo_fantasy`
   ADD PRIMARY KEY (`id_piloto_equipo`),
   ADD KEY `id_equipo` (`id_equipo`),
   ADD KEY `id_piloto` (`id_piloto`);
 
---
--- Indices de la tabla `puntos_desglose`
---
 ALTER TABLE `puntos_desglose`
   ADD PRIMARY KEY (`id`),
   ADD KEY `id_resultado` (`id_resultado`);
 
---
--- Indices de la tabla `puntos_escuderia_fantasy`
---
 ALTER TABLE `puntos_escuderia_fantasy`
   ADD PRIMARY KEY (`id`),
   ADD KEY `id_equipo` (`id_equipo`),
   ADD KEY `id_escuderia` (`id_escuderia`),
   ADD KEY `id_carrera` (`id_carrera`);
 
---
--- Indices de la tabla `puntos_fantasy`
---
 ALTER TABLE `puntos_fantasy`
   ADD PRIMARY KEY (`id_punto`),
   ADD KEY `id_equipo` (`id_equipo`),
   ADD KEY `id_piloto` (`id_piloto`),
   ADD KEY `id_carrera` (`id_carrera`);
 
---
--- Indices de la tabla `puntos_fantasy_carrera`
---
 ALTER TABLE `puntos_fantasy_carrera`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `equipo_carrera` (`id_equipo`,`id_carrera`),
   ADD KEY `id_carrera` (`id_carrera`);
 
---
--- Indices de la tabla `resultados_carrera`
---
 ALTER TABLE `resultados_carrera`
   ADD PRIMARY KEY (`id_resultado`),
   ADD KEY `id_carrera` (`id_carrera`),
   ADD KEY `id_piloto` (`id_piloto`);
 
---
--- Indices de la tabla `sync_log`
---
 ALTER TABLE `sync_log`
   ADD PRIMARY KEY (`id`),
   ADD KEY `id_carrera` (`id_carrera`);
 
---
--- Indices de la tabla `temporadas`
---
 ALTER TABLE `temporadas`
   ADD PRIMARY KEY (`id_temporada`);
 
---
--- Indices de la tabla `usuarios`
---
 ALTER TABLE `usuarios`
   ADD PRIMARY KEY (`id_usuario`),
   ADD UNIQUE KEY `correo` (`correo`);
 
---
--- Indices de la tabla `ventana_mercado`
---
 ALTER TABLE `ventana_mercado`
   ADD PRIMARY KEY (`id`);
 
---
--- AUTO_INCREMENT de las tablas volcadas
---
-
---
--- AUTO_INCREMENT de la tabla `carreras`
---
 ALTER TABLE `carreras`
   MODIFY `id_carrera` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
---
--- AUTO_INCREMENT de la tabla `clasificacion`
---
 ALTER TABLE `clasificacion`
   MODIFY `id_clasificacion` int NOT NULL AUTO_INCREMENT;
 
---
--- AUTO_INCREMENT de la tabla `equipos_fantasy`
---
 ALTER TABLE `equipos_fantasy`
   MODIFY `id_equipo` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
---
--- AUTO_INCREMENT de la tabla `escuderias`
---
 ALTER TABLE `escuderias`
   MODIFY `id_escuderia` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
---
--- AUTO_INCREMENT de la tabla `escuderia_equipo_fantasy`
---
 ALTER TABLE `escuderia_equipo_fantasy`
   MODIFY `id_relacion` int NOT NULL AUTO_INCREMENT;
 
---
--- AUTO_INCREMENT de la tabla `historial_plantilla`
---
 ALTER TABLE `historial_plantilla`
   MODIFY `id` int NOT NULL AUTO_INCREMENT;
 
---
--- AUTO_INCREMENT de la tabla `historial_precios`
---
 ALTER TABLE `historial_precios`
   MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=67;
 
---
--- AUTO_INCREMENT de la tabla `ligas`
---
 ALTER TABLE `ligas`
   MODIFY `id_liga` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
---
--- AUTO_INCREMENT de la tabla `liga_miembros`
---
 ALTER TABLE `liga_miembros`
   MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
---
--- AUTO_INCREMENT de la tabla `pilotos`
---
 ALTER TABLE `pilotos`
   MODIFY `id_piloto` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
---
--- AUTO_INCREMENT de la tabla `pilotos_equipo_fantasy`
---
 ALTER TABLE `pilotos_equipo_fantasy`
   MODIFY `id_piloto_equipo` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
---
--- AUTO_INCREMENT de la tabla `puntos_desglose`
---
 ALTER TABLE `puntos_desglose`
   MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=669;
 
---
--- AUTO_INCREMENT de la tabla `puntos_escuderia_fantasy`
---
 ALTER TABLE `puntos_escuderia_fantasy`
   MODIFY `id` int NOT NULL AUTO_INCREMENT;
 
---
--- AUTO_INCREMENT de la tabla `puntos_fantasy`
---
 ALTER TABLE `puntos_fantasy`
   MODIFY `id_punto` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
---
--- AUTO_INCREMENT de la tabla `puntos_fantasy_carrera`
---
 ALTER TABLE `puntos_fantasy_carrera`
   MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
---
--- AUTO_INCREMENT de la tabla `resultados_carrera`
---
 ALTER TABLE `resultados_carrera`
   MODIFY `id_resultado` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=253;
 
---
--- AUTO_INCREMENT de la tabla `sync_log`
---
 ALTER TABLE `sync_log`
   MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
---
--- AUTO_INCREMENT de la tabla `temporadas`
---
 ALTER TABLE `temporadas`
   MODIFY `id_temporada` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
---
--- AUTO_INCREMENT de la tabla `usuarios`
---
 ALTER TABLE `usuarios`
   MODIFY `id_usuario` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
---
--- AUTO_INCREMENT de la tabla `ventana_mercado`
---
 ALTER TABLE `ventana_mercado`
   MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
---
--- Restricciones para tablas volcadas
---
-
---
--- Filtros para la tabla `carreras`
---
 ALTER TABLE `carreras`
   ADD CONSTRAINT `carreras_ibfk_1` FOREIGN KEY (`id_temporada`) REFERENCES `temporadas` (`id_temporada`);
 
---
--- Filtros para la tabla `clasificacion`
---
 ALTER TABLE `clasificacion`
   ADD CONSTRAINT `clasificacion_ibfk_1` FOREIGN KEY (`id_equipo`) REFERENCES `equipos_fantasy` (`id_equipo`);
 
---
--- Filtros para la tabla `equipos_fantasy`
---
 ALTER TABLE `equipos_fantasy`
   ADD CONSTRAINT `equipos_fantasy_ibfk_1` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id_usuario`);
 
---
--- Filtros para la tabla `escuderia_equipo_fantasy`
---
 ALTER TABLE `escuderia_equipo_fantasy`
   ADD CONSTRAINT `escuderia_equipo_fantasy_ibfk_1` FOREIGN KEY (`id_equipo`) REFERENCES `equipos_fantasy` (`id_equipo`),
   ADD CONSTRAINT `escuderia_equipo_fantasy_ibfk_2` FOREIGN KEY (`id_escuderia`) REFERENCES `escuderias` (`id_escuderia`);
 
---
--- Filtros para la tabla `ligas`
---
 ALTER TABLE `ligas`
   ADD CONSTRAINT `ligas_ibfk_1` FOREIGN KEY (`id_creador`) REFERENCES `usuarios` (`id_usuario`);
 
---
--- Filtros para la tabla `liga_miembros`
---
 ALTER TABLE `liga_miembros`
   ADD CONSTRAINT `liga_miembros_ibfk_1` FOREIGN KEY (`id_liga`) REFERENCES `ligas` (`id_liga`) ON DELETE CASCADE,
   ADD CONSTRAINT `liga_miembros_ibfk_2` FOREIGN KEY (`id_equipo`) REFERENCES `equipos_fantasy` (`id_equipo`) ON DELETE CASCADE;
 
---
--- Filtros para la tabla `pilotos`
---
 ALTER TABLE `pilotos`
   ADD CONSTRAINT `pilotos_ibfk_1` FOREIGN KEY (`id_escuderia`) REFERENCES `escuderias` (`id_escuderia`);
 
---
--- Filtros para la tabla `pilotos_equipo_fantasy`
---
 ALTER TABLE `pilotos_equipo_fantasy`
   ADD CONSTRAINT `pilotos_equipo_fantasy_ibfk_1` FOREIGN KEY (`id_equipo`) REFERENCES `equipos_fantasy` (`id_equipo`),
   ADD CONSTRAINT `pilotos_equipo_fantasy_ibfk_2` FOREIGN KEY (`id_piloto`) REFERENCES `pilotos` (`id_piloto`);
 
---
--- Filtros para la tabla `puntos_desglose`
---
 ALTER TABLE `puntos_desglose`
   ADD CONSTRAINT `desglose_ibfk_1` FOREIGN KEY (`id_resultado`) REFERENCES `resultados_carrera` (`id_resultado`) ON DELETE CASCADE;
 
---
--- Filtros para la tabla `puntos_fantasy`
---
 ALTER TABLE `puntos_fantasy`
   ADD CONSTRAINT `puntos_fantasy_ibfk_1` FOREIGN KEY (`id_equipo`) REFERENCES `equipos_fantasy` (`id_equipo`),
   ADD CONSTRAINT `puntos_fantasy_ibfk_2` FOREIGN KEY (`id_piloto`) REFERENCES `pilotos` (`id_piloto`),
   ADD CONSTRAINT `puntos_fantasy_ibfk_3` FOREIGN KEY (`id_carrera`) REFERENCES `carreras` (`id_carrera`);
 
---
--- Filtros para la tabla `resultados_carrera`
---
 ALTER TABLE `resultados_carrera`
   ADD CONSTRAINT `resultados_carrera_ibfk_1` FOREIGN KEY (`id_carrera`) REFERENCES `carreras` (`id_carrera`),
   ADD CONSTRAINT `resultados_carrera_ibfk_2` FOREIGN KEY (`id_piloto`) REFERENCES `pilotos` (`id_piloto`);
 
--- Actualizar logo_url para equipos sin imagen
 UPDATE `escuderias` SET `logo_url` = 'https://media.formula1.com/image/upload/f_auto,c_limit,q_auto,w_1320/content/dam/fom-website/teams/2026/audi.png' WHERE `nombre` = 'Audi Revolut F1 Team' AND (`logo_url` IS NULL OR `logo_url` = '');
 UPDATE `escuderias` SET `logo_url` = 'https://media.formula1.com/image/upload/f_auto,c_limit,q_auto,w_1320/content/dam/fom-website/teams/2026/cadillac.png' WHERE `nombre` = 'Cadillac Formula 1 Team' AND (`logo_url` IS NULL OR `logo_url` = '');
 COMMIT;
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

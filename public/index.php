@@ -40,7 +40,7 @@ $proximoGP = $stmtGP->fetch();
 if ($proximoGP) {
     $nombreGP   = htmlspecialchars($proximoGP['nombre']);
     $circuitoGP = htmlspecialchars($proximoGP['circuito']);
-    $tsGP       = strtotime($proximoGP['fecha'] . ' 14:00:00');
+    $tsGP       = (new DateTime($proximoGP['fecha'] . ' 14:00:00', new DateTimeZone('Europe/Madrid')))->getTimestamp();
 } else {
     $calendario = [
         ['nombre'=>'Gran Premio de España',       'circuito'=>'Montmeló',          'fecha'=>'2026-06-07'],
@@ -53,9 +53,9 @@ if ($proximoGP) {
         ['nombre'=>'Gran Premio de Abu Dabi',     'circuito'=>'Yas Marina',        'fecha'=>'2026-12-06'],
     ];
     $hoy = date('Y-m-d');
-    $nombreGP = 'Gran Premio de Abu Dabi'; $circuitoGP = 'Yas Marina'; $tsGP = strtotime('2026-12-06 14:00:00');
+    $nombreGP = 'Gran Premio de Abu Dabi'; $circuitoGP = 'Yas Marina'; $tsGP = (new DateTime('2026-12-06 14:00:00', new DateTimeZone('Europe/Madrid')))->getTimestamp();
     foreach ($calendario as $gp) {
-        if ($gp['fecha'] >= $hoy) { $nombreGP=$gp['nombre']; $circuitoGP=$gp['circuito']; $tsGP=strtotime($gp['fecha'].' 14:00:00'); break; }
+        if ($gp['fecha'] >= $hoy) { $nombreGP=$gp['nombre']; $circuitoGP=$gp['circuito']; $tsGP=(new DateTime($gp['fecha'].' 14:00:00', new DateTimeZone('Europe/Madrid')))->getTimestamp(); break; }
     }
 }
 

@@ -253,7 +253,7 @@ function colorEscuderia(string $nombre, array $mapa): string {
 
 $stmtCarrera = $pdo->query("SELECT nombre, fecha FROM carreras WHERE fecha >= CURDATE() ORDER BY fecha ASC LIMIT 1");
 $proximaCarrera = $stmtCarrera->fetch();
-$tsProximaCarrera = $proximaCarrera ? strtotime($proximaCarrera['fecha'] . ' 14:00:00') : 0;
+$tsProximaCarrera = $proximaCarrera ? (new DateTime($proximaCarrera['fecha'] . ' 14:00:00', new DateTimeZone('Europe/Madrid')))->getTimestamp() : 0;
 
 $presupuestoInicial = 40000000;
 $gastado            = $presupuestoInicial - $presupuesto;

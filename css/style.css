@@ -4086,3 +4086,64 @@ tbody tr:last-child td { border-bottom: none; }
 
     .modal { max-height: 90vh; }
 }
+/* ── Tabla de resultados en móvil ── */
+@media (max-width: 768px) {
+
+    .res-tabla-wrap {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        border-radius: 6px;
+    }
+
+    .res-tabla {
+        font-size: 11px;
+        min-width: 520px;
+    }
+
+    .res-tabla th,
+    .res-tabla td {
+        padding: 8px 6px;
+    }
+
+    /* Ocultar columnas menos importantes: banderas y penalizaciones */
+    .res-tabla th:nth-child(8),
+    .res-tabla td:nth-child(8),
+    .res-tabla th:nth-child(9),
+    .res-tabla td:nth-child(9),
+    .res-tabla th:nth-child(10),
+    .res-tabla td:nth-child(10) {
+        display: none;
+    }
+
+    .td-pts { font-size: 13px; }
+
+    .estado-badge {
+        font-size: 9px;
+        padding: 2px 5px;
+        letter-spacing: 0.5px;
+    }
+}
+
+@media (max-width: 480px) {
+
+    .res-tabla {
+        font-size: 10px;
+        min-width: 400px;
+    }
+
+    .res-tabla th,
+    .res-tabla td {
+        padding: 7px 5px;
+    }
+
+    /* En pantallas muy pequeñas también ocultar VR y Pole */
+    .res-tabla th:nth-child(6),
+    .res-tabla td:nth-child(6),
+    .res-tabla th:nth-child(7),
+    .res-tabla td:nth-child(7) {
+        display: none;
+    }
+
+    .res-tabla td:nth-child(2) strong { font-size: 11px; }
+    .res-tabla td:nth-child(2) span   { font-size: 10px; }
+}

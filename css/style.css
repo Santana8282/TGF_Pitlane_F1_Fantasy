@@ -4095,7 +4095,6 @@ tbody tr:last-child td { border-bottom: none; }
 
     .modal { max-height: 90vh; }
 }
-/* ── Tabla de resultados en móvil ── */
 @media (max-width: 768px) {
 
     .res-tabla-wrap {
@@ -4114,7 +4113,6 @@ tbody tr:last-child td { border-bottom: none; }
         padding: 8px 6px;
     }
 
-    /* Ocultar columnas menos importantes: banderas y penalizaciones */
     .res-tabla th:nth-child(8),
     .res-tabla td:nth-child(8),
     .res-tabla th:nth-child(9),
@@ -4145,7 +4143,6 @@ tbody tr:last-child td { border-bottom: none; }
         padding: 7px 5px;
     }
 
-    /* En pantallas muy pequeñas también ocultar VR y Pole */
     .res-tabla th:nth-child(6),
     .res-tabla td:nth-child(6),
     .res-tabla th:nth-child(7),
